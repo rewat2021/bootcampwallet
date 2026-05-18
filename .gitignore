@@ -48,6 +48,7 @@ bin/
 
 # walt.id
 secret*
+!**/Secret.kt
 */*/data
 !.github/**/data/
 **/*.db
