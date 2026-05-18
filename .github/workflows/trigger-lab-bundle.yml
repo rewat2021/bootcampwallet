@@ -1,0 +1,20 @@
+name: Trigger Lab Bundle Rebuild
+
+on:
+  push:
+    branches: ['master', 'main']
+    tags: ['v*']
+
+jobs:
+  trigger:
+    name: Notify VerifierAPI to rebuild waltid images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send rebuild-waltid dispatch to VerifierAPI
+        env:
+          GH_TOKEN: ${{ secrets.PAT }}
+        run: |
+          gh api repos/${{ github.repository_owner }}/VerifierAPI/dispatches \
+            --method POST \
+            -f event_type=rebuild-waltid
+          echo "Triggered rebuild-waltid on VerifierAPI"
