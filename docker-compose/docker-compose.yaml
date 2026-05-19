@@ -1,6 +1,9 @@
 services:
   wallet-api:
-    image: ${IMAGE_PREFIX}waltid/wallet-api:${VERSION_TAG:-latest}
+    #image: ${IMAGE_PREFIX}waltid/wallet-api:${VERSION_TAG:-latest}
+    build:
+        context: ../
+        dockerfile: waltid-services/waltid-wallet-api/Dockerfile
     profiles:
       - services
       - identity
@@ -24,7 +27,10 @@ services:
       - lab-network
 
   issuer-api:
-    image: ${IMAGE_PREFIX}waltid/issuer-api:${VERSION_TAG:-latest}
+    #image: ${IMAGE_PREFIX}waltid/issuer-api:${VERSION_TAG:-latest}
+    build:
+        context: ../
+        dockerfile: waltid-services/waltid-issuer-api/Dockerfile
     profiles:
       - services
       - identity
