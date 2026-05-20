@@ -11,7 +11,7 @@ export async function useIssuance(query: any) {
 
     watch(dids, async (newDids) => {
         await nextTick();
-        selectedDid.value = newDids?.find((item) => { return item.default == true; }) ?? newDids[0] ?? null;
+        selectedDid.value = newDids?.find((item) => { return item.default == true; }) ?? newDids?.[0] ?? null;
     });
 
     async function resolveCredentialOffer(request: string) {
@@ -107,7 +107,7 @@ export async function useIssuance(query: any) {
     const failed = ref(false);
     const failMessage = ref("Unknown error occurred.");
     async function acceptCredential() {
-        const did: string | null = selectedDid.value?.did ?? dids.value[0]?.did ?? null;
+        const did: string | null = selectedDid.value?.did ?? dids.value?.[0]?.did ?? null;
         if (did === null) { return; }
 
         try {
